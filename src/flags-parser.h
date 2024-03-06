@@ -6,7 +6,6 @@
 enum ERRORS {
     PRINT_HELP = 1,
     PARSING_ERROR,
-    MALLOC_ERROR,
 };
 
 typedef struct {

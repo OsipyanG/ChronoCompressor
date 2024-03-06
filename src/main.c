@@ -13,8 +13,10 @@ int main(int argc, char *argv[]) {
     err = parse_parameters(argc, argv, &flags);
     if (err == PARSING_ERROR) {
         print_arg_error();
+        return err;
     } else if (err == PRINT_HELP) {
         print_help();
+        return err;
     }
 
     return err;

@@ -1,4 +1,3 @@
-
 #include "flags-parser.h"
 
 #include <getopt.h>

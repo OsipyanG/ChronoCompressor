@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Lab_1 src/main.c
         src/flags-parser.c
-        src/flags-parser.h)
+        src/flags-parser.h
+        src/archive.c
+        src/archive.h)
