@@ -11,7 +11,8 @@ enum ERRORS {
 typedef struct {
     bool archive;
     bool extract;
-    char *root_dir;
+    char *dir_path;
+    char *archive_path;
 } cli_flags;
 
 int parse_parameters(int argc, char **argv, cli_flags *flags);

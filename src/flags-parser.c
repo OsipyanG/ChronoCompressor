@@ -1,7 +1,6 @@
 #include "flags-parser.h"
 
 #include <getopt.h>
-#include <stdio.h>
 #include <stdlib.h>
 
 void print_help();
@@ -21,7 +20,11 @@ int parse_parameters(int argc, char **argv, cli_flags *flags) {
     if (error) {
         return PARSING_ERROR;
     }
-    flags->root_dir = argv[optind];
+    if (flags->archive) {
+        flags->dir_path = argv[optind];
+    } else {
+        flags->archive_path = argv[optind];
+    }
     return EXIT_SUCCESS;
 }
 

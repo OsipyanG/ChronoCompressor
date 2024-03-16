@@ -1,5 +1,5 @@
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "flags-parser.h"
 
@@ -8,7 +8,7 @@ void print_arg_error();
 
 int main(int argc, char *argv[]) {
     cli_flags flags = {};
-    int err = 0;
+    int err;
 
     err = parse_parameters(argc, argv, &flags);
     if (err == PARSING_ERROR) {
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
         return err;
     } else if (err == PRINT_HELP) {
         print_help();
-        return err;
+        return EXIT_SUCCESS;
     }
 
     return err;
