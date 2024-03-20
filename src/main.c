@@ -1,32 +1,59 @@
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "flags-parser.h"
-
-void print_help();
-void print_arg_error();
+#include "archive.h"
+#include "unarchive.h"
 
 int main(int argc, char *argv[]) {
-    cli_flags flags = {};
-    int err;
+    int opt;
+    int option_index = 0;
+    char *input_path = NULL;
+    enum { MODE_NONE, ARCHIVE, UNARCHIVE } mode = MODE_NONE;
 
-    err = parse_parameters(argc, argv, &flags);
-    if (err == PARSING_ERROR) {
-        print_arg_error();
-        return err;
-    } else if (err == PRINT_HELP) {
-        print_help();
-        return EXIT_SUCCESS;
+    static struct option long_options[] = {{"archive", required_argument, 0, 'a'},
+                                           {"unarchive", required_argument, 0, 'u'},
+                                           {"path", required_argument, 0, 'p'},
+                                           {"help", no_argument, 0, 'h'},
+                                           {0, 0, 0, 0}};
+
+    while ((opt = getopt_long(argc, argv, "ha:u:", long_options, &option_index)) != -1) {
+        switch (opt) {
+            case 'a':
+                mode = ARCHIVE;
+                input_path = optarg;
+                break;
+            case 'u':
+                mode = UNARCHIVE;
+                input_path = optarg;
+                break;
+            case 'h':
+                printf("Usage: %s --archive <path_to_archive> | --unarchive <path_to_unarchive> | --help\n",
+                       argv[0]);
+                exit(EXIT_SUCCESS);
+            default:
+                fprintf(stderr,
+                        "Usage: %s --archive <path_to_archive> | --unarchive <path_to_unarchive> | --help\n",
+                        argv[0]);
+                exit(EXIT_FAILURE);
+        }
     }
 
-    return err;
-}
+    // Проверка, что путь был указан
+    if (input_path == NULL) {
+        fprintf(stderr, "You must specify a path. Use --help for usage.\n");
+        exit(EXIT_FAILURE);
+    }
 
-void print_arg_error() { fprintf(stderr, "Try 'ar --help' for more information.\n"); }
+    // Вызов функций архивации или разархивации в зависимости от режима
+    if (mode == ARCHIVE) {
+        archive(input_path);
+    } else if (mode == UNARCHIVE) {
+        unarchive(input_path);
+    } else {
+        fprintf(stderr, "Invalid mode. Use --help for usage.\n");
+        exit(EXIT_FAILURE);
+    }
 
-void print_help() {
-    fprintf(stderr, "Usage: ar [OPTION] [FILE]...\n");
-    fprintf(stderr, "Archive and unzip files\n");
-    fprintf(stderr, "  -a, --archive  Archive files and directories\n");
-    fprintf(stderr, "  -e, --extract  Extract the archive\n");
+    return 0;
 }

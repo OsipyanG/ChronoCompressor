@@ -1,4 +1,0 @@
-#ifndef LAB_1_UNARCHIVER_H
-#define LAB_1_UNARCHIVER_H
-
-#endif  // LAB_1_UNARCHIVER_H

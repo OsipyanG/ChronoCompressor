@@ -3,10 +3,10 @@ project(Lab_1 C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Lab_1 src/main.c
-        src/flags-parser.c
-        src/flags-parser.h
-        src/archiver.c
-        src/archiver.h
-        src/unarchiver.c
-        src/unarchiver.h)
+add_executable(Lab_1
+        src/main.c
+        src/archive.c
+        src/archive.h
+        src/unarchive.c
+        src/unarchive.h
+)
