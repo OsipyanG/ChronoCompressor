@@ -1,7 +1,3 @@
-//
-// Created by gurgeno on 3/20/24.
-//
-
 #include "unarchive.h"
 
 #include <errno.h>
@@ -37,6 +33,7 @@ void create_directories(const char *path) {
     }
     free(subpath);
 }
+
 void unarchive(const char *archive_path) {
     FILE *archive = fopen(archive_path, "rb");
     if (!archive) {

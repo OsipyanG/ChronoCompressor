@@ -1,5 +1,5 @@
-#ifndef LAB_1_ARCHIVE_H
-#define LAB_1_ARCHIVE_H
+#ifndef ARCHIVE_H
+#define ARCHIVE_H
 
 #include <sys/types.h>
 
@@ -14,4 +14,4 @@ typedef struct {
     // Далее следует путь к файлу
 } file_metadata;
 
-#endif  // LAB_1_ARCHIVE_H
+#endif

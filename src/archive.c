@@ -1,7 +1,3 @@
-//
-// Created by gurgeno on 3/20/24.
-//
-
 #include "archive.h"
 
 #include <dirent.h>
@@ -11,6 +7,7 @@
 #include <sys/stat.h>
 
 void write_file_to_archive(FILE *archive, const char *file_path);
+
 void archive_directory(const char *dir_path, const char *base_path, FILE *archive);
 
 void archive(const char *path) {
@@ -58,6 +55,7 @@ void write_file_to_archive(FILE *archive, const char *file_path) {
         fclose(file);
     }
 }
+
 void archive_directory(const char *dir_path, const char *base_path, FILE *archive) {
     DIR *dir;
     struct dirent *entry;
