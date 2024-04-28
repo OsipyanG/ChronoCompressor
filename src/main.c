@@ -1,6 +1,7 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "archive.h"
 #include "unarchive.h"
@@ -13,7 +14,6 @@ int main(int argc, char *argv[]) {
 
     static struct option long_options[] = {{"archive", required_argument, 0, 'a'},
                                            {"unarchive", required_argument, 0, 'u'},
-                                           {"path", required_argument, 0, 'p'},
                                            {"help", no_argument, 0, 'h'},
                                            {0, 0, 0, 0}};
 
@@ -43,6 +43,12 @@ int main(int argc, char *argv[]) {
     if (input_path == NULL) {
         fprintf(stderr, "You must specify a path. Use --help for usage.\n");
         exit(EXIT_FAILURE);
+    }
+
+    // FIXME вынести это в функцию
+    int last_element = strlen(input_path)-1;
+    if (input_path[last_element] == '/') {
+        input_path[last_element] = '\0';
     }
 
     // Вызов функций архивации или разархивации в зависимости от режима
