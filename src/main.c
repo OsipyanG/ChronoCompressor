@@ -45,8 +45,8 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    // FIXME вынести это в функцию
-    int last_element = strlen(input_path)-1;
+    // FIXME: вынести это в функцию
+    int last_element = strlen(input_path) - 1;
     if (input_path[last_element] == '/') {
         input_path[last_element] = '\0';
     }
